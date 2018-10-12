@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DbmanagerService} from '../dbmanager.service';
+import {StorageService} from '../storage.service';
 
 @Component({
   selector: 'app-call-log',
@@ -8,9 +8,11 @@ import {DbmanagerService} from '../dbmanager.service';
 })
 export class CallLogComponent implements OnInit {
 
-  constructor(private dbManager: DbmanagerService) { }
+  constructor(private storageService: StorageService) {
+  }
 
   ngOnInit() {
+      console.log(this.storageService.getAllCallLog());
   }
 
 }

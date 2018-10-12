@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
+import DbManager from './dbmanager';
 
 let mainWindow: Electron.BrowserWindow;
 
@@ -25,50 +26,17 @@ function createWindow() {
     mainWindow = null;
   });
 
-  connectDatabase();
+    const userDataPath = app.getPath('userData');
+    console.log('userDataPath:' + userDataPath);
+    const storagePath = path.join(userDataPath, 'evox.sqlite');
+    console.log('storagePath:' + storagePath);
+
+    // const { DbManager } = require('./dbmanager');
+    const dbManager = new DbManager();
+    dbManager.connectDatabase('evox', storagePath);
 }
 
-function connectDatabase() {
-  const userDataPath = app.getPath('userData');
-  console.log('userDataPath:' + userDataPath);
-  const storagePath = path.join(userDataPath, 'test2.sqlite');
-  console.log('storagePath:' + storagePath);
 
-  const Sequelize = require('sequelize');
-  // const sequelize = new Sequelize(storagePath);
-  const sequelize = new Sequelize('test2', null, null, {
-    dialect: 'sqlite',
-    storage: storagePath
-  });
-  console.log('sequelize initialize');
-  sequelize.authenticate().then(() => {
-    console.log('Connection has been established.');
-  })
-    .catch((err) => {
-      console.log('Unable to connect to the database', err);
-    });
-
-  const User = sequelize.define('user', {
-    firstName: {
-      type: Sequelize.STRING
-    },
-    lastName: {
-      type: Sequelize.STRING
-    },
-    gender: {
-      type: Sequelize.STRING
-    },
-    birthday: {
-      type: Sequelize.DATE
-    }
-  });
-
-  User.sync().then(() => {
-    // Table created.
-    // Add the model data.
-    return User.create({firstName: 'Lisa', lastName: 'Wang'});
-  });
-}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
