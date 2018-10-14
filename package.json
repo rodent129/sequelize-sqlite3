@@ -27,6 +27,8 @@
     "@angular/router": "^6.0.3",
     "core-js": "^2.5.4",
     "electron": "^3.0.2",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.21",
     "rxjs": "^6.0.0",
     "sequelize": "^4.39.0",
     "sqlite3": "^4.0.2",

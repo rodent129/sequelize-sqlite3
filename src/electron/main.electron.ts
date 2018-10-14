@@ -2,6 +2,7 @@ import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import DbManager from './dbmanager';
 
+
 let mainWindow: Electron.BrowserWindow;
 
 function createWindow() {
@@ -35,8 +36,6 @@ function createWindow() {
     const dbManager = new DbManager();
     dbManager.connectDatabase('evox', storagePath);
 }
-
-
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

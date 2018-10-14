@@ -199,6 +199,29 @@ class DbManager {
         //     console.log('error: ' + error);
         // });
 
+        // const Op = Sequelize.Op;
+        // User.findOne({ where: {birthday: { [Op.ne] : null}}}).then((user) => {
+        //         const moment = require('moment-timezone');
+        //         const utcdate = moment.utc(user.birthday).toDate();
+        //         const local = moment(utcdate).tz('Asia/Taipei').local().format('llll');
+        //         console.log('local: ' + local);
+        //     })
+        //     .catch(error => {
+        //         console.log('error: ' + error);
+        //     });
+
+    }
+
+
+    customLog(message?: any, executionMillis?: any) {
+        const debug = true;
+        if (debug) {
+            // if (benchmark) {
+            //     console.log('Lisa: ' + message + ', ' + executionMillis);
+            // } else {
+                console.log('Lisa: ' + message);
+            // }
+        }
     }
 
 
