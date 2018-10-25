@@ -14,7 +14,7 @@ class DbManager {
 
     public connectDatabase(dbname: string, storagePath: string) {
         const Sequelize = require('sequelize');
-        const sequelize = new Sequelize(dbname, 'Lisa', null, {
+        const sequelize = new Sequelize(dbname, null, null, {
             dialect: 'sqlite',
             storage: storagePath,
             operatorsAliases: false
@@ -99,7 +99,9 @@ class DbManager {
         //     });
         // });
         //
-        const Op = Sequelize.Op;
+        // const Op = Sequelize.Op;
+        // console.log(Op.like);
+        // console.log(Op.ne);
         // find all which matching the number like '123456' and data is not equal null.
         // Call.findAll({ where: {
         //         number: { [Op.like]: '123456'},

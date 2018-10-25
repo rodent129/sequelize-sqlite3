@@ -28,13 +28,20 @@ function createWindow() {
   });
 
     const userDataPath = app.getPath('userData');
-    console.log('userDataPath:' + userDataPath);
+    // console.log('userDataPath:' + userDataPath);
     const storagePath = path.join(userDataPath, 'evox.sqlite');
-    console.log('storagePath:' + storagePath);
+    // console.log('storagePath:' + storagePath);
 
-    // const { DbManager } = require('./dbmanager');
-    const dbManager = new DbManager();
-    dbManager.connectDatabase('evox', storagePath);
+    const umzug = require('../db/umzug');
+    umzug.up().then((migrations) => {
+        console.log('Migration complete');
+        console.log(migrations);
+        // const { DbManager } = require('./dbmanager');
+        const dbManager = new DbManager();
+        dbManager.connectDatabase('evox', storagePath);
+    }).catch(error => {
+        console.log(error);
+    });
 }
 
 // This method will be called when Electron has finished
